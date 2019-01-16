@@ -1,0 +1,14 @@
+D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\bin\Debug\netcoreapp2.1\CompanyNetCore.deps.json
+D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\bin\Debug\netcoreapp2.1\CompanyNetCore.runtimeconfig.json
+D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\bin\Debug\netcoreapp2.1\CompanyNetCore.runtimeconfig.dev.json
+D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\bin\Debug\netcoreapp2.1\CompanyNetCore.dll
+D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\bin\Debug\netcoreapp2.1\CompanyNetCore.pdb
+D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\obj\Debug\netcoreapp2.1\CompanyNetCore.csprojAssemblyReference.cache
+D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\obj\Debug\netcoreapp2.1\CompanyNetCore.csproj.CoreCompileInputs.cache
+D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\obj\Debug\netcoreapp2.1\CompanyNetCore.RazorAssemblyInfo.cache
+D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\obj\Debug\netcoreapp2.1\CompanyNetCore.RazorAssemblyInfo.cs
+D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\obj\Debug\netcoreapp2.1\CompanyNetCore.AssemblyInfoInputs.cache
+D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\obj\Debug\netcoreapp2.1\CompanyNetCore.AssemblyInfo.cs
+D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\obj\Debug\netcoreapp2.1\CompanyNetCore.RazorTargetAssemblyInfo.cache
+D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\obj\Debug\netcoreapp2.1\CompanyNetCore.dll
+D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\obj\Debug\netcoreapp2.1\CompanyNetCore.pdb
