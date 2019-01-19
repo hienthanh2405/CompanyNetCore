@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CompanyNetCore.Entities;
+using CompanyNetCore.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CompanyNetCore.Controllers
@@ -19,15 +20,26 @@ namespace CompanyNetCore.Controllers
 
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<Company>> Get()
+        public IActionResult Get(int pageNo = 1, int pageSize = 10)
         {
-            var companies = _context.Companies;
-            return Ok(companies);
+            int skip = (pageNo - 1) * pageSize;
+
+            int total = _context.Companies.Count();
+
+            //select the companies based on paging parameter
+            var companies = _context.Companies
+                .OrderBy(c=>c.Id)
+                .Skip(skip)
+                .Take(pageSize)
+                .ToList();
+
+            // Return the list of customers
+            return Ok(new PagedResult<Company>(companies, pageNo, pageSize, total));
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<Company> Get(Guid id)
+        public IActionResult Get(Guid id)
         {
             var company = _context.Find(typeof(Company), id);
             return Ok(company);
