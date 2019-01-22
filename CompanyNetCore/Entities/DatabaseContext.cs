@@ -12,5 +12,18 @@ namespace CompanyNetCore.Entities
         { }
          
         public DbSet<Company> Companies { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Company>();
+
+            //Remove cascading deletes
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

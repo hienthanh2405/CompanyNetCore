@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompanyNetCore.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20190116161548_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20190120080414_CreateDatabaseContext")]
+    partial class CreateDatabaseContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

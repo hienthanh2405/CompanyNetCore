@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CompanyNetCore.Migrations.PersonDatabase
 {
-    public partial class CreateDatabasePerson : Migration
+    public partial class CreateDatabaseContext : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

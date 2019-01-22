@@ -20,21 +20,29 @@ namespace CompanyNetCore.Controllers
 
         // GET api/values
         [HttpGet]
-        public IActionResult Get(int pageNo = 1, int pageSize = 10)
+        public IActionResult Get(int offset = 1, int limit = 10)
         {
-            int skip = (pageNo - 1) * pageSize;
-
+            int skip = (offset - 1) * limit;
             int total = _context.Companies.Count();
 
+            var query = _context.Companies.AsQueryable();
+
+            //var filterBy = filteringParams.FilterBy.Trim().ToLowerInvariant();
+            //if (!string.IsNullOrEmpty(filterBy))
+            //{
+            //    query = query.Where(c => c.Name.ToLowerInvariant().Contains(filterBy)
+            //                             || c.Address.ToLowerInvariant().Contains(filterBy));
+            //}
+
             //select the companies based on paging parameter
-            var companies = _context.Companies
+            var companies = query
                 .OrderBy(c=>c.Id)
                 .Skip(skip)
-                .Take(pageSize)
+                .Take(limit)
                 .ToList();
 
             // Return the list of customers
-            return Ok(new PagedResult<Company>(companies, pageNo, pageSize, total));
+            return Ok(new PagedResult<Company>(companies, offset, limit, total));
         }
 
         // GET api/values/5
@@ -59,14 +67,18 @@ namespace CompanyNetCore.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(Guid id, [FromBody]Company company)
         {
-            var companyOlder = _context.Find(typeof(Company), id);
-            companyOlder = new Company
-            {
-                Id = id,
-                Name = company.Name,
-                Address = company.Address,
-                Description = company.Description
-            };
+            var companyOlder = _context.Companies.Where(c => c.Id == id).FirstOrDefault();
+            //companyOlder = new Company
+            //{
+            //    Id = id,
+            //    Name = company.Name,
+            //    Address = company.Address,
+            //    Description = company.Description
+            //};
+            companyOlder.Name = company.Name;
+            companyOlder.Address = company.Address;
+            companyOlder.Description = company.Description;
+
             _context.Update(companyOlder);
             _context.SaveChanges();
 
@@ -75,9 +87,9 @@ namespace CompanyNetCore.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
-            var companyOlder = _context.Find(typeof(Company), id);
+            var companyOlder = _context.Companies.Where(c => c.Id == id).FirstOrDefault();
             _context.Remove(companyOlder);
             _context.SaveChanges();
 
