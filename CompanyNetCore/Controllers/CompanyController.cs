@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using CompanyNetCore.Entities;
 using CompanyNetCore.Helpers;
 using Microsoft.AspNetCore.Mvc;
@@ -20,23 +18,37 @@ namespace CompanyNetCore.Controllers
 
         // GET api/values
         [HttpGet]
-        public IActionResult Get(int offset = 1, int limit = 10)
+        public IActionResult Get([FromQuery]int offset = 1, [FromQuery]int limit = 10, 
+            [FromQuery]string filterParams = null, [FromQuery]string sortParams = null)
         {
             int skip = (offset - 1) * limit;
             int total = _context.Companies.Count();
 
             var query = _context.Companies.AsQueryable();
 
-            //var filterBy = filteringParams.FilterBy.Trim().ToLowerInvariant();
-            //if (!string.IsNullOrEmpty(filterBy))
-            //{
-            //    query = query.Where(c => c.Name.ToLowerInvariant().Contains(filterBy)
-            //                             || c.Address.ToLowerInvariant().Contains(filterBy));
-            //}
+            if (!string.IsNullOrEmpty(filterParams))
+            {
+                filterParams = filterParams.Trim().ToLowerInvariant();
+                query = query.Where(c => c.Name.ToLowerInvariant().Contains(filterParams)
+                                            || c.Address.ToLowerInvariant().Contains(filterParams));
+            }
+
+            if (!string.IsNullOrEmpty(sortParams))
+            {
+                switch (sortParams.ToLowerInvariant())
+                {
+                    case "id":
+                        query = query.OrderBy(c => c.Id);
+                        break;
+                    case "name":
+                        query = query.OrderBy(c => c.Name);
+                        break;
+                }
+            }
+            
 
             //select the companies based on paging parameter
             var companies = query
-                .OrderBy(c=>c.Id)
                 .Skip(skip)
                 .Take(limit)
                 .ToList();
@@ -68,13 +80,7 @@ namespace CompanyNetCore.Controllers
         public IActionResult Put(Guid id, [FromBody]Company company)
         {
             var companyOlder = _context.Companies.Where(c => c.Id == id).FirstOrDefault();
-            //companyOlder = new Company
-            //{
-            //    Id = id,
-            //    Name = company.Name,
-            //    Address = company.Address,
-            //    Description = company.Description
-            //};
+            
             companyOlder.Name = company.Name;
             companyOlder.Address = company.Address;
             companyOlder.Description = company.Description;
