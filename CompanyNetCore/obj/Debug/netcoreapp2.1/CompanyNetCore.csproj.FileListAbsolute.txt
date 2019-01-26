@@ -12,3 +12,4 @@ D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\obj\Debug\netcoreapp2.1\Com
 D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\obj\Debug\netcoreapp2.1\CompanyNetCore.RazorTargetAssemblyInfo.cache
 D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\obj\Debug\netcoreapp2.1\CompanyNetCore.dll
 D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\obj\Debug\netcoreapp2.1\CompanyNetCore.pdb
+D:\Nhat\CompanyNetCore\CompanyNetCore\CompanyNetCore\bin\Debug\netcoreapp2.1\nlog.config

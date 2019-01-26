@@ -3,6 +3,7 @@ using System.Linq;
 using CompanyNetCore.Entities;
 using CompanyNetCore.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace CompanyNetCore.Controllers
 {
@@ -11,9 +12,12 @@ namespace CompanyNetCore.Controllers
     public class CompanyController : ControllerBase
     {
         private readonly DatabaseContext _context;
-        public CompanyController(DatabaseContext context)
+        protected readonly ILogger<CompanyController> _logger;
+
+        public CompanyController(DatabaseContext context, ILogger<CompanyController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET api/values
@@ -61,7 +65,8 @@ namespace CompanyNetCore.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
-            var company = _context.Find(typeof(Company), id);
+            var company = _context.Companies.Where(c => c.Id == id).FirstOrDefault();
+
             return Ok(company);
         }
 
@@ -69,10 +74,19 @@ namespace CompanyNetCore.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Company company)
         {
-            _context.Add(company);
-            _context.SaveChanges();
+            try
+            {
+                _context.Add(company);
+                _context.SaveChanges();
 
-            return Created("", company.Id);
+                return Created("", company.Id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Can't not create database" + ex.ToString());
+                throw new Exception($"Can't not create database" + ex.ToString());
+            }
+           
         }
 
         // PUT api/values/5
